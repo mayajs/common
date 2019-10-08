@@ -14,21 +14,21 @@ export class Functions<Chain> implements IFunctions<Chain> {
     return this;
   }
 
-  isBoolean(value?: RegExp): Chain {
+  isBoolean(): Chain {
     const test = (field: any): boolean => typeof field === "boolean";
     this.runner.addValidation(test, "is not a boolean");
     return this.middleware;
   }
 
-  isString(value?: RegExp): Chain {
-    const validChars = value ? value : /^[A-Za-z0-9_\-@.,()\s]*$/;
+  isString(regex?: RegExp): Chain {
+    const validChars = regex ? regex : /^[A-Za-z0-9_\-@.,()\s]*$/;
     const test = (field: any): boolean => typeof field === "string" && field.length !== 0 && new RegExp(validChars).test(field);
     this.runner.addValidation(test, "is not a string or not a valid string format");
     return this.middleware;
   }
 
-  isAddress(value?: RegExp): Chain {
-    const validChars = value ? value : /^[a-zA-Z0-9-#_\-.,()@\s]*$/;
+  isAddress(regex?: RegExp): Chain {
+    const validChars = regex ? regex : /^[a-zA-Z0-9-#_\-.,()@\s]*$/;
     const test = (field: any): boolean => typeof field === "string" && field.length !== 0 && new RegExp(validChars).test(field);
     this.runner.addValidation(test, "is not a valid address format");
     return this.middleware;
