@@ -1,7 +1,8 @@
 export interface IFunctions<Chain> {
   body(): this;
   params(): this;
-  isBoolean(value?: RegExp): Chain;
+  isNumber(): Chain;
+  isBoolean(): Chain;
   isString(value?: RegExp): Chain;
   isAddress(value?: RegExp): Chain;
   minLength(value: number): Chain;

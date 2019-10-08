@@ -14,6 +14,12 @@ export class Functions<Chain> implements IFunctions<Chain> {
     return this;
   }
 
+  isNumber(): Chain {
+    const test = (field: any): boolean => typeof field === "number" && !isNaN(field);
+    this.runner.addValidation(test, "is not a number");
+    return this.middleware;
+  }
+
   isBoolean(): Chain {
     const test = (field: any): boolean => typeof field === "boolean";
     this.runner.addValidation(test, "is not a boolean");
