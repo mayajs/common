@@ -1,11 +1,6 @@
 import "reflect-metadata";
 import { NextFunction, Request, Response } from "express";
-
-import { Runner } from "./lib/Runner";
-import { IChain } from "./lib/Interface";
-import { Functions } from "./lib/Functions";
-import { Container } from "./lib/Container";
-import { MethodDecoratorFactory } from "./lib/MethodFactory";
+import { MethodDecoratorFactory, Container, Functions, IChain, Runner } from "./lib";
 
 /**
  * Checks specified field for validation
