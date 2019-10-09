@@ -4,18 +4,24 @@ import { IFunctions } from "./Interface";
 export class Functions<Chain> implements IFunctions<Chain> {
   constructor(private runner: Runner, private middleware: Chain) {}
 
-  body(): this {
+  body(): Chain {
     this.runner.setReqType("body");
-    return this;
+    return this.middleware;
   }
 
-  params(): this {
+  params(): Chain {
     this.runner.setReqType("params");
-    return this;
+    return this.middleware;
   }
 
   validate(field: any, callback: boolean): boolean {
     return typeof field !== "undefined" && field.length > 0 ? callback : true;
+  }
+
+  required(): Chain {
+    const test = (field: any): boolean => typeof field !== "undefined" && field.length > 0;
+    this.runner.addValidation(test, "is required");
+    return this.middleware;
   }
 
   isNumber(): Chain {
@@ -35,7 +41,7 @@ export class Functions<Chain> implements IFunctions<Chain> {
   isRegExp(regex: RegExp): Chain {
     const condition = (field: any) => typeof field === "string" && new RegExp(regex).test(field);
     const test = (field: any): boolean => this.validate(field, condition(field));
-    this.runner.addValidation(test, "is not a string or not a valid string format");
+    this.runner.addValidation(test, `not match the regexp pattern of ${regex}`);
     return this.middleware;
   }
 
