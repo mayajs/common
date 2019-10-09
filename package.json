@@ -47,5 +47,8 @@
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.5.3",
     "wait-on": "^3.3.0"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.1.13"
   }
 }
