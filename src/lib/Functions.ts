@@ -15,7 +15,7 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   validate(field: any, callback: boolean): boolean {
-    return typeof field !== "undefined" || field !== null ? callback : true;
+    return typeof field !== "undefined" && field.length > 0 ? callback : true;
   }
 
   isNumber(): Chain {
