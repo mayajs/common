@@ -1,12 +1,14 @@
 import { Callback, RequestMethod } from "./Types";
 
 export interface IFunctions<Chain> {
-  body(): this;
-  params(): this;
+  body(): Chain;
+  params(): Chain;
+  required(): Chain;
   isNumber(): Chain;
   isBoolean(): Chain;
-  isString(value?: RegExp): Chain;
-  isAddress(value?: RegExp): Chain;
+  isString(): Chain;
+  isAddress(): Chain;
+  isRegExp(regex: RegExp): Chain;
   minLength(value: number): Chain;
   maxLength(value: number): Chain;
   isDate(): Chain;
