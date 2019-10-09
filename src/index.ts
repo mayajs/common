@@ -7,6 +7,10 @@ import { Functions } from "./lib/Functions";
 import { Container } from "./lib/Container";
 import { MethodDecoratorFactory } from "./lib/MethodFactory";
 
+/**
+ * Checks specified field for validation
+ * @param fieldName name of the field to be checked
+ */
 export function Check(fieldName: string): IChain {
   const runner = new Runner(fieldName);
   const middleware: any = (req: Request, res: Response, next: NextFunction) => {
@@ -22,7 +26,9 @@ export function Check(fieldName: string): IChain {
 
 /**
  * GET Method Decorator
- * @param properties - Sets the path and validation for this method.
+ * @param properties - Sets the properties of the method.
+ * @param properties.path - Sets the path of the route.
+ * @param properties.middlewares - Sets an array of middlewares for this method.
  */
 export function Get(properties: { path: string; middlewares?: Array<(...args: any[]) => void> }): MethodDecorator {
   return MethodDecoratorFactory("get")(properties);
@@ -30,7 +36,9 @@ export function Get(properties: { path: string; middlewares?: Array<(...args: an
 
 /**
  * POST Method Decorator
- * @param properties - Sets the path and validation for this method.
+ * @param properties - Sets the properties of the method.
+ * @param properties.path - Sets the path of the route.
+ * @param properties.middlewares - Sets an array of middlewares for this method.
  */
 export function Post(properties: { path: string; middlewares?: Array<(...args: any[]) => void> }): MethodDecorator {
   return MethodDecoratorFactory("post")(properties);
@@ -38,7 +46,9 @@ export function Post(properties: { path: string; middlewares?: Array<(...args: a
 
 /**
  * PATCH Method Decorator
- * @param properties - Sets the path and validation for this method.
+ * @param properties - Sets the properties of the method.
+ * @param properties.path - Sets the path of the route.
+ * @param properties.middlewares - Sets an array of middlewares for this method.
  */
 export function Patch(properties: { path: string; middlewares?: Array<(...args: any[]) => void> }): MethodDecorator {
   return MethodDecoratorFactory("patch")(properties);
@@ -46,7 +56,9 @@ export function Patch(properties: { path: string; middlewares?: Array<(...args: 
 
 /**
  * PUT Method Decorator
- * @param properties - Sets the path and validation for this method.
+ * @param properties - Sets the properties of the method.
+ * @param properties.path - Sets the path of the route.
+ * @param properties.middlewares - Sets an array of middlewares for this method.
  */
 export function Put(properties: { path: string; middlewares?: Array<(...args: any[]) => void> }): MethodDecorator {
   return MethodDecoratorFactory("put")(properties);
@@ -54,7 +66,9 @@ export function Put(properties: { path: string; middlewares?: Array<(...args: an
 
 /**
  * DELETE Method Decorator
- * @param properties - Sets the path and validation for this method.
+ * @param properties - Sets the properties of the method.
+ * @param properties.path - Sets the path of the route.
+ * @param properties.middlewares - Sets an array of middlewares for this method.
  */
 export function Delete(properties: { path: string; middlewares?: Array<(...args: any[]) => void> }): MethodDecorator {
   return MethodDecoratorFactory("delete")(properties);
