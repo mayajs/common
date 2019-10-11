@@ -96,9 +96,13 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   notEmpty(): Chain {
-    const test = (field: any): boolean => this.fieldEmpty(typeof field === "number" || typeof field === "boolean" ? field.toString() : field);
+    const test = (field: any): boolean => this.fieldEmpty(this.fieldTypeNumberOrBoolean(field) ? field.toString() : field);
     this.runner.addValidation(test, "is emtpy");
     return this.middleware;
+  }
+
+  private fieldTypeNumberOrBoolean(field: any): boolean {
+    return typeof field === "number" || typeof field === "boolean";
   }
 
   private validate(field: any, callback: boolean): boolean {
