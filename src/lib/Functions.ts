@@ -15,7 +15,7 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   required(): Chain {
-    const test = (field: any): boolean => this.fieldUndefined(field) && field.length > 0;
+    const test = (field: any): boolean => this.fieldUndefined(field);
     this.runner.addValidation(test, "is required");
     return this.middleware;
   }
@@ -92,6 +92,12 @@ export class Functions<Chain> implements IFunctions<Chain> {
     const condition = (field: any) => typeof field === "string" && new RegExp(validChars).test(field);
     const test = (field: any): boolean => this.validate(field, condition(field));
     this.runner.addValidation(test, "is not a valid password");
+    return this.middleware;
+  }
+
+  notEmpty(): Chain {
+    const test = (field: any): boolean => this.fieldEmpty(typeof field === "number" || typeof field === "boolean" ? field.toString() : field);
+    this.runner.addValidation(test, "is emtpy");
     return this.middleware;
   }
 
