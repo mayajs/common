@@ -28,7 +28,7 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   isBoolean(): Chain {
-    const condition = (field: any): boolean => typeof field === "boolean";
+    const condition = (field: any): boolean => this.fieldTypeBoolean(field);
     const test = (field: any): boolean => this.validate(field, condition(field));
     this.runner.addValidation(test, "is not a boolean");
     return this.middleware;
