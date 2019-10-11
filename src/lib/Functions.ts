@@ -96,10 +96,14 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   private validate(field: any, callback: boolean): boolean {
-    return this.fieldUndefined(field) && field.length > 0 ? callback : true;
+    return this.fieldEmpty(field) ? callback : true;
   }
 
   private fieldUndefined(field: any): boolean {
     return typeof field !== "undefined";
+  }
+
+  private fieldEmpty(field: any): boolean {
+    return this.fieldUndefined(field) && field.length > 0;
   }
 }
