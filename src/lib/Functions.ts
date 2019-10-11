@@ -106,20 +106,25 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   private fieldTypeNumber(field: any): boolean {
-    return typeof field === "number";
+    return this.checkVariableType(field, "number");
   }
 
   private fieldTypeBoolean(field: any): boolean {
-    return typeof field === "boolean";
+    return this.checkVariableType(field, "boolean");
   }
 
   private fieldTypeString(field: any): boolean {
-    return typeof field === "string";
+    return this.checkVariableType(field, "string");
   }
 
   private fieldTypeUndefined(field: any): boolean {
-    return typeof field !== "undefined";
+    return !this.checkVariableType(field, "undefined");
   }
+
+  private checkVariableType(field: any, type: string): boolean {
+    return typeof field === type;
+  }
+
   private validate(field: any, callback: boolean): boolean {
     return this.fieldEmpty(field) ? callback : true;
   }
