@@ -15,7 +15,7 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   required(): Chain {
-    const test = (field: any): boolean => this.fieldUndefined(field);
+    const test = (field: any): boolean => this.fieldTypeUndefined(field);
     this.runner.addValidation(test, "is required");
     return this.middleware;
   }
@@ -102,22 +102,26 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   private fieldTypeNumberOrBoolean(field: any): boolean {
-    return this.fieldTypeNumber(field) || typeof field === "boolean";
+    return this.fieldTypeNumber(field) || this.fieldTypeBoolean(field);
   }
 
   private fieldTypeNumber(field: any): boolean {
     return typeof field === "number";
   }
 
+  private fieldTypeBoolean(field: any): boolean {
+    return typeof field === "boolean";
+  }
+
   private validate(field: any, callback: boolean): boolean {
     return this.fieldEmpty(field) ? callback : true;
   }
 
-  private fieldUndefined(field: any): boolean {
+  private fieldTypeUndefined(field: any): boolean {
     return typeof field !== "undefined";
   }
 
   private fieldEmpty(field: any): boolean {
-    return this.fieldUndefined(field) && field.length > 0;
+    return this.fieldTypeUndefined(field) && field.length > 0;
   }
 }
