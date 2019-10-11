@@ -15,8 +15,7 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   required(): Chain {
-    const test = (field: any): boolean => this.fieldTypeUndefined(field);
-    this.runner.addValidation(test, "is required");
+    this.fieldRequired();
     return this.middleware;
   }
 
@@ -94,6 +93,7 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   notEmpty(): Chain {
+    this.fieldRequired();
     const test = (field: any): boolean => this.fieldEmpty(this.fieldTypeNumberOrBoolean(field) ? field.toString() : field);
     this.runner.addValidation(test, "is emtpy");
     return this.middleware;
@@ -128,10 +128,15 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   private fieldEmpty(field: any): boolean {
-    return this.fieldTypeUndefined(field) && field.length > 0;
+    return field.length > 0;
   }
 
   private regExpTest(field: any, pattern: RegExp): boolean {
     return new RegExp(pattern).test(field);
+  }
+
+  private fieldRequired(): void {
+    const test = (field: any): boolean => this.fieldTypeUndefined(field);
+    this.runner.addValidation(test, "is required");
   }
 }
