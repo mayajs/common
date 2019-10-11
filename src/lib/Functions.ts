@@ -14,12 +14,8 @@ export class Functions<Chain> implements IFunctions<Chain> {
     return this.middleware;
   }
 
-  validate(field: any, callback: boolean): boolean {
-    return typeof field !== "undefined" && field.length > 0 ? callback : true;
-  }
-
   required(): Chain {
-    const test = (field: any): boolean => typeof field !== "undefined" && field.length > 0;
+    const test = (field: any): boolean => this.fieldUndefined(field) && field.length > 0;
     this.runner.addValidation(test, "is required");
     return this.middleware;
   }
@@ -97,5 +93,13 @@ export class Functions<Chain> implements IFunctions<Chain> {
     const test = (field: any): boolean => this.validate(field, condition(field));
     this.runner.addValidation(test, "is not a valid password");
     return this.middleware;
+  }
+
+  private validate(field: any, callback: boolean): boolean {
+    return this.fieldUndefined(field) && field.length > 0 ? callback : true;
+  }
+
+  private fieldUndefined(field: any): boolean {
+    return typeof field !== "undefined";
   }
 }
