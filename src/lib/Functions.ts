@@ -102,7 +102,11 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   private fieldTypeNumberOrBoolean(field: any): boolean {
-    return typeof field === "number" || typeof field === "boolean";
+    return this.fieldTypeNumber(field) || typeof field === "boolean";
+  }
+
+  private fieldTypeNumber(field: any): boolean {
+    return typeof field === "number";
   }
 
   private validate(field: any, callback: boolean): boolean {
