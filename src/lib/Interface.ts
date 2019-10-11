@@ -14,6 +14,7 @@ export interface IFunctions<Chain> {
   isDate(): Chain;
   isEmail(): Chain;
   isPassword(): Chain;
+  notEmpty(): Chain;
 }
 
 export interface IChain extends IFunctions<IChain> {
