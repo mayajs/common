@@ -94,7 +94,7 @@ export class Functions<Chain> implements IFunctions<Chain> {
 
   notEmpty(): Chain {
     this.fieldRequired();
-    const test = (field: any): boolean => this.fieldEmpty(this.sanitizeField(field));
+    const test = (field: any): boolean => (this.fieldTypeUndefined(field) ? this.sanitizeField(field).length > 0 : true);
     this.runner.addValidation(test, "is emtpy");
     return this.middleware;
   }
