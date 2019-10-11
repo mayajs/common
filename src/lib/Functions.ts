@@ -21,47 +21,47 @@ export class Functions<Chain> implements IFunctions<Chain> {
 
   isNumber(): Chain {
     const condition = (field: any): boolean => this.fieldTypeNumber(field) && !isNaN(field);
-    const test = (field: any): boolean => this.validate(field, condition(field));
+    const test = (field: any): boolean => this.validate(field, () => condition(field));
     this.runner.addValidation(test, "is not a number");
     return this.middleware;
   }
 
   isBoolean(): Chain {
     const condition = (field: any): boolean => this.fieldTypeBoolean(field);
-    const test = (field: any): boolean => this.validate(field, condition(field));
+    const test = (field: any): boolean => this.validate(field, () => condition(field));
     this.runner.addValidation(test, "is not a boolean");
     return this.middleware;
   }
 
   isRegExp(regex: RegExp): Chain {
     const condition = (field: any) => this.fieldTypeString(field) && this.regExpTest(field, regex);
-    const test = (field: any): boolean => this.validate(field, condition(field));
+    const test = (field: any): boolean => this.validate(field, () => condition(field));
     this.runner.addValidation(test, `not match the regexp pattern of ${regex}`);
     return this.middleware;
   }
 
   isString(): Chain {
     const condition = (field: any) => this.fieldTypeString(field) && this.regExpTest(field, /^[A-Za-z0-9.,\s]*$/);
-    const test = (field: any): boolean => this.validate(field, condition(field));
+    const test = (field: any): boolean => this.validate(field, () => condition(field));
     this.runner.addValidation(test, "is not a string or not a valid string format");
     return this.middleware;
   }
 
   isAddress(): Chain {
     const condition = (field: any) => this.fieldTypeString(field) && this.regExpTest(field, /^[a-zA-Z0-9#_\-.,()@\s]*$/);
-    const test = (field: any): boolean => this.validate(field, condition(field));
+    const test = (field: any): boolean => this.validate(field, () => condition(field));
     this.runner.addValidation(test, "is not a valid address format");
     return this.middleware;
   }
 
   minLength(value: number): Chain {
-    const test = (field: any): boolean => this.validate(field, field.length >= value);
+    const test = (field: any): boolean => this.validate(field, () => field.length >= value);
     this.runner.addValidation(test, `must have a length of ${value}`);
     return this.middleware;
   }
 
   maxLength(value: number): Chain {
-    const test = (field: any): boolean => this.validate(field, field.length <= value);
+    const test = (field: any): boolean => this.validate(field, () => field.length <= value);
     this.runner.addValidation(test, `must be ${value} in length or fewer`);
     return this.middleware;
   }
@@ -71,7 +71,7 @@ export class Functions<Chain> implements IFunctions<Chain> {
       const date = new Date(field);
       return Object.prototype.toString.call(date) === "[object Date]" && !isNaN(date.getTime());
     };
-    const test = (field: any): boolean => this.validate(field, condition(field));
+    const test = (field: any): boolean => this.validate(field, () => condition(field));
     this.runner.addValidation(test, `must be valid date format`);
     return this.middleware;
   }
@@ -79,7 +79,7 @@ export class Functions<Chain> implements IFunctions<Chain> {
   isEmail(): Chain {
     const validChars = /^[a-zA-Z0-9_.-]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
     const condition = (field: any) => this.fieldTypeString(field) && this.regExpTest(field, validChars);
-    const test = (field: any): boolean => this.validate(field, condition(field));
+    const test = (field: any): boolean => this.validate(field, () => condition(field));
     this.runner.addValidation(test, "is not a valid email");
     return this.middleware;
   }
@@ -87,7 +87,7 @@ export class Functions<Chain> implements IFunctions<Chain> {
   isPassword(): Chain {
     const validChars = /((?=.*\d)(?=.*[A-Z])(?=.*\W))/;
     const condition = (field: any) => this.fieldTypeString(field) && this.regExpTest(field, validChars);
-    const test = (field: any): boolean => this.validate(field, condition(field));
+    const test = (field: any): boolean => this.validate(field, () => condition(field));
     this.runner.addValidation(test, "is not a valid password");
     return this.middleware;
   }
@@ -127,12 +127,12 @@ export class Functions<Chain> implements IFunctions<Chain> {
     return typeof field === type;
   }
 
-  private validate(field: any, callback: boolean): boolean {
-    return this.fieldEmpty(field) ? callback : true;
+  private validate(field: any, callback: () => boolean): boolean {
+    return this.fieldEmpty(field) ? callback() : true;
   }
 
   private fieldEmpty(field: any): boolean {
-    return field.length > 0;
+    return this.fieldTypeUndefined(field) && field.length > 0;
   }
 
   private regExpTest(field: any, pattern: RegExp): boolean {
