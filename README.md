@@ -32,7 +32,7 @@ npm i @mayajs/common
   - [notEmpty](#notempty)
   - [required](#required)
 
-# Decorators
+# DECORATORS
 
 ## GET
 
@@ -110,11 +110,11 @@ function(){
 }
 ```
 
-# Validations
+# VALIDATIONS
 
 ## Check
 
-This is a function used for checking fields for BODY and PARAMS in a request.
+This is a function used for validating fields for `BODY` and `PARAMS` of a request.
 
 ### Import
 
@@ -126,7 +126,12 @@ import { Check } from "@mayajs/common";
 
 ```javascript
 @Post({ path: "/", middlewares: [
-     Check("users"),
+     Check("age") // Name of the fields to be checked. `defaults` to check the `body` of the request.
+     .isNumber() // Checks if the field is a number
+     .minLength(5) // Checks if the field has a minimum length of 5
+     .maxLength(10) // Checks if the field has a maximum length of 10
+     .notEmpty() // Checks if the field is not empty
+     .required(), // Checks if the field is present or not undefined
 ] })
 function(){}
 ```
@@ -145,7 +150,7 @@ import { Check } from "@mayajs/common";
 
 ```javascript
 @Post({ path: "/", middlewares: [
-     Check("prize").isNumber(),
+     Check("age").isNumber(),
 ] })
 function(){}
 ```
@@ -164,7 +169,7 @@ import { Check } from "@mayajs/common";
 
 ```javascript
 @Post({ path: "/", middlewares: [
-     Check("prize").isBoolean(),
+     Check("islogin").isBoolean(),
 ] })
 function(){}
 ```
@@ -183,7 +188,7 @@ import { Check } from "@mayajs/common";
 
 ```javascript
 @Post({ path: "/", middlewares: [
-     Check("prize").isString(),
+     Check("password").isString(),
 ] })
 function(){}
 ```
@@ -202,7 +207,7 @@ import { Check } from "@mayajs/common";
 
 ```javascript
 @Post({ path: "/", middlewares: [
-     Check("prize").isAddress(),
+     Check("address").isAddress(),
 ] })
 function(){}
 ```
@@ -221,7 +226,7 @@ import { Check } from "@mayajs/common";
 
 ```javascript
 @Post({ path: "/", middlewares: [
-     Check("prize").isRegExp(/^[A-Za-z0-9.,\s]*$/),
+     Check("password").isRegExp(/^[A-Za-z0-9.,\s]*$/),
 ] })
 function(){}
 ```
@@ -240,7 +245,7 @@ import { Check } from "@mayajs/common";
 
 ```javascript
 @Post({ path: "/", middlewares: [
-     Check("prize").minLength(5),
+     Check("password").minLength(5),
 ] })
 function(){}
 ```
@@ -259,7 +264,7 @@ import { Check } from "@mayajs/common";
 
 ```javascript
 @Post({ path: "/", middlewares: [
-     Check("prize").maxLength(10),
+     Check("password").maxLength(10),
 ] })
 function(){}
 ```
@@ -278,7 +283,7 @@ import { Check } from "@mayajs/common";
 
 ```javascript
 @Post({ path: "/", middlewares: [
-     Check("prize").isDate(),
+     Check("date").isDate(),
 ] })
 function(){}
 ```
@@ -297,7 +302,7 @@ import { Check } from "@mayajs/common";
 
 ```javascript
 @Post({ path: "/", middlewares: [
-     Check("prize").isEmail(),
+     Check("email").isEmail(),
 ] })
 function(){}
 ```
@@ -316,7 +321,7 @@ import { Check } from "@mayajs/common";
 
 ```javascript
 @Post({ path: "/", middlewares: [
-     Check("prize").isPassword(),
+     Check("password").isPassword(),
 ] })
 function(){}
 ```
@@ -335,7 +340,26 @@ import { Check } from "@mayajs/common";
 
 ```javascript
 @Post({ path: "/", middlewares: [
-     Check("prize").notEmpty(),
+     Check("password").notEmpty(),
+] })
+function(){}
+```
+
+## required
+
+This is a validation function that is used along with `Check`. This function checks if the field is not `undefined` and send a validation error response if its not.
+
+### Import
+
+```javascript
+import { Check } from "@mayajs/common";
+```
+
+### Usage
+
+```javascript
+@Post({ path: "/", middlewares: [
+     Check("user").required(),
 ] })
 function(){}
 ```
