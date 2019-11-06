@@ -28,7 +28,8 @@ export class Utils {
   }
 
   private fieldEmpty(field: any): boolean {
-    return this.undefined(field) && typeof field === "number" ? field > 0 : field.length > 0;
+    const isNumber = this.number(field) ? field > 0 : false;
+    return this.undefined(field) && field.length ? field.length > 0 : isNumber;
   }
 
   private checkVariableType(field: any, type: string): boolean {
