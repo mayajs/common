@@ -19,7 +19,7 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   required(): Chain {
-    const test = (field: any): boolean => this.utils.undefined(field);
+    const test = (field: any): boolean => this.utils.notUndefined(field);
     this.runner.addValidation(test, "is required");
     return this.middleware;
   }
@@ -60,14 +60,14 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   minLength(value: number): Chain {
-    const condition = (field: any): boolean => (typeof field === "number" ? field >= value : field.length >= value);
+    const condition = (field: any): boolean => (this.utils.number(field) ? field >= value : field.length >= value);
     const test = (field: any): boolean => this.utils.validate(field, () => condition(field));
     this.runner.addValidation(test, `must have a length of ${value}`);
     return this.middleware;
   }
 
   maxLength(value: number): Chain {
-    const condition = (field: any): boolean => (typeof field === "number" ? field <= value : field.length <= value);
+    const condition = (field: any): boolean => (this.utils.number(field) ? field <= value : field.length <= value);
     const test = (field: any): boolean => this.utils.validate(field, () => condition(field));
     this.runner.addValidation(test, `must not exceed a length of ${value}`);
     return this.middleware;
@@ -100,7 +100,7 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   notEmpty(): Chain {
-    const test = (field: any): boolean => (this.utils.undefined(field) ? this.utils.sanitizeField(field).length > 0 : true);
+    const test = (field: any): boolean => (field !== null ? this.utils.validate(field, () => this.utils.sanitizeField(field).length > 0) : false);
     this.runner.addValidation(test, "is emtpy");
     return this.middleware;
   }
