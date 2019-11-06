@@ -7,6 +7,7 @@ export interface IFunctions<Chain> {
   isNumber(): Chain;
   isBoolean(): Chain;
   isString(): Chain;
+  isArray(message?: string): Chain;
   isAddress(): Chain;
   isRegExp(regex: RegExp): Chain;
   minLength(value: number): Chain;
