@@ -16,6 +16,7 @@ export interface IFunctions<Chain> {
   isEmail(): Chain;
   isPassword(): Chain;
   notEmpty(): Chain;
+  includes<T>(array: T[], message?: string): Chain;
 }
 
 export interface IChain extends IFunctions<IChain> {
