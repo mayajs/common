@@ -60,14 +60,16 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   minLength(value: number): Chain {
-    const test = (field: any): boolean => this.utils.validate(field, () => field.length >= value);
+    const condition = (field: any): boolean => (typeof field === "number" ? field >= value : field.length >= value);
+    const test = (field: any): boolean => this.utils.validate(field, () => condition(field));
     this.runner.addValidation(test, `must have a length of ${value}`);
     return this.middleware;
   }
 
   maxLength(value: number): Chain {
-    const test = (field: any): boolean => this.utils.validate(field, () => field.length <= value);
-    this.runner.addValidation(test, `must be ${value} in length or fewer`);
+    const condition = (field: any): boolean => (typeof field === "number" ? field <= value : field.length <= value);
+    const test = (field: any): boolean => this.utils.validate(field, () => condition(field));
+    this.runner.addValidation(test, `must not exceed a length of ${value}`);
     return this.middleware;
   }
 
