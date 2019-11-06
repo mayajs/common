@@ -4,7 +4,7 @@ export class Utils {
   }
 
   number(field: any): boolean {
-    return this.checkVariableType(field, "number");
+    return this.checkVariableType(field, "number") && !isNaN(field);
   }
 
   boolean(field: any): boolean {
@@ -15,25 +15,20 @@ export class Utils {
     return this.checkVariableType(field, "string");
   }
 
-  undefined(field: any): boolean {
+  notUndefined(field: any): boolean {
     return !this.checkVariableType(field, "undefined");
   }
 
   validate(field: any, callback: () => boolean): boolean {
-    return this.fieldEmpty(field) ? callback() : true;
+    return this.fieldNotEmpty(field) ? callback() : true;
   }
 
   regExpTest(field: any, pattern: RegExp): boolean {
     return new RegExp(pattern).test(field);
   }
 
-  private fieldEmpty(field: any): boolean {
-    const isNumber = this.number(field) ? field > 0 : false;
-
-    if (field !== null && this.undefined(field)) {
-      return field.length ? field.length > 0 : isNumber;
-    }
-    return false;
+  private fieldNotEmpty(field: any): boolean {
+    return this.notUndefined(field) && field !== null;
   }
 
   private checkVariableType(field: any, type: string): boolean {
