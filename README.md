@@ -26,7 +26,9 @@ npm i @mayajs/common
   - [isRegExp](#isregexp)
   - [isDate](#isdate)
   - [isEmail](#isemail)
+  - [isArray](#isarray)
   - [isPassword](#ispassword)
+  - [includes](#includes)
   - [minLength](#minlength)
   - [maxLength](#maxlength)
   - [notEmpty](#notempty)
@@ -360,6 +362,44 @@ import { Check } from "@mayajs/common";
 ```javascript
 @Post({ path: "/", middlewares: [
      Check("user").required(),
+] })
+function(){}
+```
+
+## isArray
+
+This is a validation function that is used along with `Check`. This function checks if the field is an `array` and send a validation error response if its not.
+
+### Import
+
+```javascript
+import { Check } from "@mayajs/common";
+```
+
+### Usage
+
+```javascript
+@Post({ path: "/", middlewares: [
+     Check("user").isArray(),
+] })
+function(){}
+```
+
+## includes
+
+This is a validation function that is used along with `Check`. This function accepts an array of values and checks if the field or fields items values is included on the `array` and send a validation error response if its not.
+
+### Import
+
+```javascript
+import { Check } from "@mayajs/common";
+```
+
+### Usage
+
+```javascript
+@Post({ path: "/", middlewares: [
+     Check("user").includes<string>(["cats", "dogs"]),
 ] })
 function(){}
 ```
