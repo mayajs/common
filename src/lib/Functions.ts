@@ -102,4 +102,10 @@ export class Functions<Chain> implements IFunctions<Chain> {
     this.runner.addValidation(test, "is emtpy");
     return this.middleware;
   }
+
+  isArray(message?: string): Chain {
+    const test = (field: any): boolean => this.utils.validate(field, () => Array.isArray(field));
+    this.runner.addValidation(test, message ? message : "is not an array");
+    return this.middleware;
+  }
 }
