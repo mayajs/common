@@ -7,6 +7,7 @@ export interface IFunctions<Chain> {
   isNumber(): Chain;
   isBoolean(): Chain;
   isString(): Chain;
+  isArray(message?: string): Chain;
   isAddress(): Chain;
   isRegExp(regex: RegExp): Chain;
   minLength(value: number): Chain;
@@ -15,6 +16,7 @@ export interface IFunctions<Chain> {
   isEmail(): Chain;
   isPassword(): Chain;
   notEmpty(): Chain;
+  includes<T>(array: T[], message?: string): Chain;
 }
 
 export interface IChain extends IFunctions<IChain> {
