@@ -108,4 +108,18 @@ export class Functions<Chain> implements IFunctions<Chain> {
     this.runner.addValidation(test, message ? message : "is not an array");
     return this.middleware;
   }
+
+  includes<T>(array: T[], message?: string): Chain {
+    const condition = (field: any) => {
+      if (Array.isArray(field)) {
+        const filtered = field.filter((e: any) => !array.includes(e));
+        return filtered.length === 0;
+      }
+
+      return array.includes(field);
+    };
+    const test = (field: any): boolean => this.utils.validate(field, () => condition(field));
+    this.runner.addValidation(test, message ? message : `only accepts the following value(s) [ ${array.join(", ")} ]`);
+    return this.middleware;
+  }
 }
