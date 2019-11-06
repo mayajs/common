@@ -28,7 +28,7 @@ export class Runner {
       error = this.validations
         .map(validation => {
           if (!validation.method(req[this.reqType][this.field])) {
-            return `${this.field} ${validation.message}`;
+            return `${this.reqType.toUpperCase()}[${this.field}] : ${validation.message}`;
           }
         })
         .filter(e => typeof e !== "undefined");
