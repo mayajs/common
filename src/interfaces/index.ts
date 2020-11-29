@@ -1,4 +1,4 @@
-import { Callback, RequestMethod } from "../types";
+import { Callback, RequestMethod } from "@mayajs/core/types";
 
 export interface IFunctions<Chain> {
   body(): Chain;
