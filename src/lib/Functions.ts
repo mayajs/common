@@ -1,6 +1,5 @@
-import { Runner } from "./Runner";
 import { IFunctions } from "../interfaces";
-import { Utils } from "../utils";
+import { Utils, Runner } from "../utils";
 
 export class Functions<Chain> implements IFunctions<Chain> {
   private utils: Utils;

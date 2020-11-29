@@ -1,7 +1,8 @@
 import "reflect-metadata";
 import { NextFunction, Request, Response } from "@mayajs/core";
-import { MethodDecoratorFactory, Container, Functions, Runner } from "./lib";
+import { MethodDecoratorFactory, Container, Functions } from "./lib";
 import { IChain } from "./interfaces";
+import { Runner } from "./utils";
 
 /**
  * Checks specified field for validation
