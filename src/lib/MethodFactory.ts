@@ -1,3 +1,4 @@
+import { CONTROLLER_ROUTES } from "@mayajs/core";
 import { IMethod, IRoute } from "./Interface";
 import { RequestMethod } from "./Types";
 
@@ -11,22 +12,18 @@ export function MethodDecoratorFactory(method: RequestMethod): (param: IMethod) 
     return (target: object, propertyKey: string | symbol): void => {
       // In case this is the first route to be registered the `routes` metadata is likely to be undefined at this point.
       // To prevent any further validation simply set it to an empty array here.
-      if (!Reflect.hasMetadata("routes", target.constructor)) {
-        Reflect.defineMetadata("routes", [], target.constructor);
+      if (!Reflect.hasMetadata(CONTROLLER_ROUTES, target.constructor)) {
+        Reflect.defineMetadata(CONTROLLER_ROUTES, [], target.constructor);
       }
 
       // Get the routes stored so far, extend it by the new route and re-set the metadata.
-      const routes = Reflect.getMetadata("routes", target.constructor) as IRoute[];
+      const routes = Reflect.getMetadata(CONTROLLER_ROUTES, target.constructor) as IRoute[];
 
-      routes.push({
-        methodName: propertyKey as string,
-        middlewares,
-        path,
-        requestMethod: method,
-      });
+      // Push current route object to existing routes
+      routes.push({ methodName: String(propertyKey), middlewares, path, requestMethod: method });
 
       // Add routes metadata to the target object
-      Reflect.defineMetadata("routes", routes, target.constructor);
+      Reflect.defineMetadata(CONTROLLER_ROUTES, routes, target.constructor);
     };
   };
 }
