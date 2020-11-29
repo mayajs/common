@@ -1,9 +1,10 @@
 import { CONTROLLER_ROUTES } from "@mayajs/core";
-import { IMethod, IRoute } from "./Interface";
-import { RequestMethod } from "./Types";
+import { IMethod, IRoute } from "../interfaces";
+import { RequestMethod } from "../types";
 
 /**
  * Factory function for a decorator that recieve a method type and return a MethodDecorator
+ *
  * @param method Type of method to be applied on the route ie: "get" | "post" | "delete" | "options" | "put" | "patch"
  * @returns Function(param: IMethod) => MethodDecorator
  */
