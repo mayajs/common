@@ -1,6 +1,6 @@
 import { Runner } from "./Runner";
-import { IFunctions } from "./Interface";
-import { Utils } from "./Utils";
+import { IFunctions } from "../interfaces";
+import { Utils } from "../utils";
 
 export class Functions<Chain> implements IFunctions<Chain> {
   private utils: Utils;
@@ -100,7 +100,8 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   notEmpty(): Chain {
-    const test = (field: any): boolean => (field !== null ? this.utils.validate(field, () => this.utils.sanitizeField(field).length > 0) : false);
+    const test = (field: any): boolean =>
+      field !== null ? this.utils.validate(field, () => this.utils.sanitizeField(field).length > 0) : false;
     this.runner.addValidation(test, "is emtpy");
     return this.middleware;
   }
