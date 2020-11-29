@@ -1,1 +1,1 @@
-export * from "./MethodFactory";
+export * from "./method-factory";
