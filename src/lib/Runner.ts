@@ -1,5 +1,4 @@
-import { Request } from "express";
-
+import { Request } from "@mayajs/core";
 export class Runner {
   private reqType: "body" | "params";
   private validations: any[] = [];
@@ -26,12 +25,12 @@ export class Runner {
     let error: Array<string | undefined> = [];
     if (this.validations.length > 0) {
       error = this.validations
-        .map(validation => {
+        .map((validation) => {
           if (!validation.method(req[this.reqType][this.field])) {
             return `${this.reqType.toUpperCase()}[${this.field}] : ${validation.message}`;
           }
         })
-        .filter(e => typeof e !== "undefined");
+        .filter((e) => typeof e !== "undefined");
     }
     return error.length > 0 ? { status: true, message: error.join(", ") } : { status: false, message: "" };
   }

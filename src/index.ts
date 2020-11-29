@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from "@mayajs/core";
 import { MethodDecoratorFactory, Container, Functions, IChain, Runner } from "./lib";
 
 /**
