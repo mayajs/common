@@ -1,5 +1,6 @@
 {
-  "exclude": [".vscode", ".github", ".git", "node_modules", "lib/**"],
+  "include": ["./src/**/*.ts"],
+  "exclude": ["test", ".vscode", ".github", ".git"],
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
