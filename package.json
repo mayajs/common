@@ -1,6 +1,6 @@
 {
   "name": "@mayajs/common",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A Node.js framework for REST API server-side-applications.",
   "main": "index.js",
   "files": [
