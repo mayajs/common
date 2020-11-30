@@ -1,8 +1,13 @@
+// EXTERNAL IMPORTS
 import "reflect-metadata";
 import { NextFunction, Request, Response } from "@mayajs/core";
+import { Callback } from "@mayajs/core/types";
+
+// LOCAL IMPORTS
+import { Runner, Container, Functions } from "./utils";
+import { MethodFactoryOptions } from "./types";
 import { MethodDecoratorFactory } from "./lib";
 import { IChain } from "./interfaces";
-import { Runner, Container, Functions } from "./utils";
 
 /**
  * Checks specified field for validation
@@ -27,8 +32,8 @@ export function Check(fieldName: string): IChain {
  * @param properties.path - Sets the path of the route.
  * @param properties.middlewares - Sets an array of middlewares for this method.
  */
-export function Get(properties: { path: string; middlewares?: Array<(...args: any[]) => void> }): MethodDecorator {
-  return MethodDecoratorFactory("get")(properties);
+export function Get(properties?: MethodFactoryOptions, middlewares: Callback[] = []): MethodDecorator {
+  return MethodDecoratorFactory("get")(properties, middlewares);
 }
 
 /**
@@ -37,8 +42,8 @@ export function Get(properties: { path: string; middlewares?: Array<(...args: an
  * @param properties.path - Sets the path of the route.
  * @param properties.middlewares - Sets an array of middlewares for this method.
  */
-export function Post(properties: { path: string; middlewares?: Array<(...args: any[]) => void> }): MethodDecorator {
-  return MethodDecoratorFactory("post")(properties);
+export function Post(properties?: MethodFactoryOptions, middlewares: Callback[] = []): MethodDecorator {
+  return MethodDecoratorFactory("post")(properties, middlewares);
 }
 
 /**
@@ -47,8 +52,8 @@ export function Post(properties: { path: string; middlewares?: Array<(...args: a
  * @param properties.path - Sets the path of the route.
  * @param properties.middlewares - Sets an array of middlewares for this method.
  */
-export function Patch(properties: { path: string; middlewares?: Array<(...args: any[]) => void> }): MethodDecorator {
-  return MethodDecoratorFactory("patch")(properties);
+export function Patch(properties?: MethodFactoryOptions, middlewares: Callback[] = []): MethodDecorator {
+  return MethodDecoratorFactory("patch")(properties, middlewares);
 }
 
 /**
@@ -57,8 +62,8 @@ export function Patch(properties: { path: string; middlewares?: Array<(...args: 
  * @param properties.path - Sets the path of the route.
  * @param properties.middlewares - Sets an array of middlewares for this method.
  */
-export function Put(properties: { path: string; middlewares?: Array<(...args: any[]) => void> }): MethodDecorator {
-  return MethodDecoratorFactory("put")(properties);
+export function Put(properties?: MethodFactoryOptions, middlewares: Callback[] = []): MethodDecorator {
+  return MethodDecoratorFactory("put")(properties, middlewares);
 }
 
 /**
@@ -67,6 +72,6 @@ export function Put(properties: { path: string; middlewares?: Array<(...args: an
  * @param properties.path - Sets the path of the route.
  * @param properties.middlewares - Sets an array of middlewares for this method.
  */
-export function Delete(properties: { path: string; middlewares?: Array<(...args: any[]) => void> }): MethodDecorator {
+export function Delete(properties?: MethodFactoryOptions, middlewares: Callback[] = []): MethodDecorator {
   return MethodDecoratorFactory("delete")(properties);
 }
