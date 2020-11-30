@@ -4,7 +4,7 @@ import { Callback } from "@mayajs/core/types";
 
 // LOCAL IMPORTS
 import { MethodFactoryOptions } from "../types";
-import { MethodDecoratorFactory } from "../lib";
+import { MethodDecoratorFactory } from "../utils/method-factory";
 
 /**
  * GET Method Decorator
