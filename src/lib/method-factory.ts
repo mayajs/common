@@ -1,6 +1,7 @@
-import { CONTROLLER_ROUTES } from "@mayajs/core";
-import { IMethod, IRoute } from "../interfaces";
-import { RequestMethod } from "../types";
+import { Callback, RequestMethod } from "@mayajs/core/types";
+import { CONTROLLER_ROUTES } from "@mayajs/core/utils/constants";
+import { MethodFactory, MethodFactoryOptions } from "../types";
+import { IRoute } from "../interfaces";
 
 /**
  * Factory function for a decorator that recieve a method type and return a MethodDecorator
@@ -8,8 +9,25 @@ import { RequestMethod } from "../types";
  * @param method Type of method to be applied on the route ie: "get" | "post" | "delete" | "options" | "put" | "patch"
  * @returns Function(param: IMethod) => MethodDecorator
  */
-export function MethodDecoratorFactory(method: RequestMethod): (param: IMethod) => MethodDecorator {
-  return ({ path, middlewares = [] }: IMethod): MethodDecorator => {
+export function MethodDecoratorFactory(method: RequestMethod): MethodFactory {
+  return (options: MethodFactoryOptions = "", middlewares: Callback[] = []): MethodDecorator => {
+    // Initital path string
+    let path = "";
+
+    // Check if options is a string
+    if (typeof options === "string") {
+      // Set path to options if not undefined else set it to empty string
+      path = options ?? "";
+    }
+
+    // Check if options is an object and also not an array
+    if (typeof options === "object" && !Array.isArray(options)) {
+      // Set path to options.path if not undefined else set it to empty string
+      path = options.path ?? "";
+      // Set middlewares to options.middlewares if not undefined else set it to empty array
+      middlewares = options.middlewares ?? [];
+    }
+
     return (target: object, propertyKey: string | symbol): void => {
       // In case this is the first route to be registered the `routes` metadata is likely to be undefined at this point.
       // To prevent any further validation simply set it to an empty array here.
