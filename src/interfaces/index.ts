@@ -1,4 +1,4 @@
-import { Callback, RequestMethod } from "@mayajs/core/types";
+import { Callback } from "@mayajs/core/types";
 
 export interface IFunctions<Chain> {
   body(): Chain;
@@ -26,11 +26,4 @@ export interface IChain extends IFunctions<IChain> {
 export interface IMethod {
   path: string; // Path to our method
   middlewares?: Callback[]; // Middleware for validition of method
-}
-
-export interface IRoute {
-  path: string; // Path to our route
-  requestMethod: RequestMethod; // HTTP Request method (get, post, patch, delete, put)
-  methodName: string; // Method name within our class responsible for this route
-  middlewares: Callback[]; // Middleware for validition of route
 }
