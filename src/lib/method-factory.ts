@@ -1,7 +1,10 @@
-import { Callback, RequestMethod } from "@mayajs/core/types";
+// EXTERNAL IMPORTS
 import { CONTROLLER_ROUTES } from "@mayajs/core/utils/constants";
+import { Callback, RequestMethod } from "@mayajs/core/types";
+import { Route } from "@mayajs/core/interfaces";
+
+// LOCAL IMPORTS
 import { MethodFactory, MethodFactoryOptions } from "../types";
-import { IRoute } from "../interfaces";
 
 /**
  * Factory function for a decorator that recieve a method type and return a MethodDecorator
@@ -36,7 +39,7 @@ export function MethodDecoratorFactory(method: RequestMethod): MethodFactory {
       }
 
       // Get the routes stored so far, extend it by the new route and re-set the metadata.
-      const routes = Reflect.getMetadata(CONTROLLER_ROUTES, target.constructor) as IRoute[];
+      const routes = Reflect.getMetadata(CONTROLLER_ROUTES, target.constructor) as Route[];
 
       // Push current route object to existing routes
       routes.push({ methodName: String(propertyKey), middlewares, path, requestMethod: method });
