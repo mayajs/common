@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { NextFunction, Request, Response } from "express";
-import { MethodDecoratorFactory, Container, Functions, IChain, Runner } from "./lib";
+import { MethodDecoratorFactory, Container, Functions, IChain, Runner, StatusCodes } from "./lib";
 
 /**
  * Checks specified field for validation
@@ -11,7 +11,7 @@ export function Check(fieldName: string): IChain {
   const middleware: any = (req: Request, res: Response, next: NextFunction) => {
     const error = runner.run(req);
     if (error.status) {
-      res.status(403).json({ status: "Validation Error", message: error.message });
+      res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({ status: "Validation Error", message: error.message });
     } else {
       next();
     }
