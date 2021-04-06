@@ -24,6 +24,6 @@ export interface IChain extends IFunctions<IChain> {
 }
 
 export interface IMethod {
-  path: string; // Path to our method
+  path?: string; // Path to our method
   middlewares?: Callback[]; // Middleware for validition of method
 }
