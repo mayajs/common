@@ -41,6 +41,7 @@
   },
   "homepage": "https://github.com/Mackignacio/maya#readme",
   "devDependencies": {
+    "@mayajs/core": "^0.4.1",
     "reflect-metadata": "^0.1.13",
     "typescript": "^3.9.9"
   }
