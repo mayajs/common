@@ -1,6 +1,5 @@
 export * from "./lib";
 import "reflect-metadata";
-import { NextFunction, Request, Response } from "express";
 import { MethodDecoratorFactory, Container, Functions, IChain, Runner, IMethod } from "./lib";
 
 /**
@@ -9,10 +8,10 @@ import { MethodDecoratorFactory, Container, Functions, IChain, Runner, IMethod }
  */
 export function Check(fieldName: string): IChain {
   const runner = new Runner(fieldName);
-  const middleware: any = (req: Request, res: Response, next: NextFunction) => {
+  const middleware: any = ({ req, res }: any, next: any) => {
     const error = runner.run(req);
     if (error.status) {
-      res.status(403).json({ status: "Validation Error", message: error.message });
+      res.send({ status: "Validation Error", message: error.message });
     } else {
       next();
     }
