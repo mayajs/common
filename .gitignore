@@ -7,6 +7,7 @@ yarn-error.log*
 
 # Build directory
 dist
+lib
 
 # Test directories
 test/
