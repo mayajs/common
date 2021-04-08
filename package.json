@@ -41,13 +41,7 @@
   },
   "homepage": "https://github.com/Mackignacio/maya#readme",
   "devDependencies": {
-    "@mayajs/core": "^0.4.1",
-    "ts-lint": "^4.5.1",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.9.9",
-    "wait-on": "^3.3.0"
-  },
-  "dependencies": {
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "typescript": "^3.9.9"
   }
 }
