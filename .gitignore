@@ -9,8 +9,7 @@ yarn-error.log*
 dist
 
 # Test directories
-**.js
-**.d.ts
+test/
 
 #gulp
 !gulpfile.js
