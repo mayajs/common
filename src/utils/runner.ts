@@ -1,4 +1,5 @@
-import { Request } from "@mayajs/core";
+import { MayaJsRequest } from "@mayajs/core";
+
 export class Runner {
   private requestType: "body" | "params";
   private validations: any[] = [];
@@ -21,7 +22,7 @@ export class Runner {
     this.validations.push({ method, message });
   }
 
-  run(req: Request): { status: boolean; message?: string } {
+  run(req: MayaJsRequest): { status: boolean; message?: string } {
     let error: Array<string | undefined> = [];
     if (this.validations.length > 0) {
       error = this.validations
