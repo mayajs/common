@@ -1,12 +1,11 @@
-import { Callback } from "@mayajs/core/types";
-import { IMethod } from "../interfaces";
+import { Callback, DecoratorMethodOptions } from "@mayajs/core";
 
 /**
  * Method factory options type
  */
-export type MethodFactoryOptions = IMethod | string | undefined;
+export type MethodFactoryOptions = DecoratorMethodOptions | string;
 
 /**
  * Method factory function type
  */
-export type MethodFactory = (param: MethodFactoryOptions, middlewares?: Callback[]) => MethodDecorator;
+export type MethodFactory = { (path: DecoratorMethodOptions): MethodDecorator; (path: string, middlewares: Callback[]): MethodDecorator };

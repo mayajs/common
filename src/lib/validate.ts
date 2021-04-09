@@ -1,8 +1,4 @@
-// EXTERNAL IMPORTS
-import "reflect-metadata";
-import { NextFunction, Request, Response } from "@mayajs/core";
-
-// LOCAL IMPORTS
+import { MayaJsNextFunction, MayaJsRequest, MayaJsResponse } from "@mayajs/core";
 import { Runner, Container, Functions } from "../utils";
 import { IChain } from "../interfaces";
 
@@ -12,10 +8,10 @@ import { IChain } from "../interfaces";
  */
 export function Check(fieldName: string): IChain {
   const runner = new Runner(fieldName);
-  const middleware: any = (req: Request, res: Response, next: NextFunction) => {
+  const middleware: any = (req: MayaJsRequest, res: MayaJsResponse, next: MayaJsNextFunction) => {
     const error = runner.run(req);
     if (error.status) {
-      res.status(403).json({ status: "Validation Error", message: error.message });
+      res.send({ status: "Validation Error", message: error.message });
     } else {
       next();
     }
