@@ -37,9 +37,9 @@
   "author": "Mark Anthony C. Ignacio",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Mackignacio/maya/issues"
+    "url": "https://github.com/macign/maya/issues"
   },
-  "homepage": "https://github.com/Mackignacio/maya#readme",
+  "homepage": "https://github.com/macign/maya#readme",
   "devDependencies": {
     "@mayajs/core": "^0.4.1",
     "reflect-metadata": "^0.1.13",
