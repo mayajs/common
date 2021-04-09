@@ -1,5 +1,3 @@
-import { Callback } from "@mayajs/core/types";
-
 export interface IFunctions<Chain> {
   body(): Chain;
   params(): Chain;
@@ -21,9 +19,4 @@ export interface IFunctions<Chain> {
 
 export interface IChain extends IFunctions<IChain> {
   (req: any, res: any, next: (error?: any) => void): void;
-}
-
-export interface IMethod {
-  path?: string; // Path to our method
-  middlewares?: Callback[]; // Middleware for validition of method
 }
