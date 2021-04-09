@@ -1,6 +1,6 @@
 {
   "name": "@mayajs/common",
-  "version": "0.4.0",
+  "version": "0.4.0-rc1",
   "description": "A Node.js framework for REST API server-side-applications.",
   "main": "lib/index.js",
   "files": [
@@ -11,7 +11,7 @@
     "!.git"
   ],
   "scripts": {
-    "clean": "rimraf index.js && rimraf index.d.ts && rimraf lib",
+    "clean": "rimraf index.js && rimraf index.d.ts && rimraf lib && rimraf interfaces && rimraf types",
     "tgz": "rimraf *.tgz",
     "package": "node ./scripts/clean-package.js",
     "start": "npm run clean && npm run tgz && tsc -w",

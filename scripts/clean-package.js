@@ -22,7 +22,7 @@ removableProps.forEach((prop) => delete packageData[prop]);
 
 // Define new scripts
 const scripts = {
-  clean: "rimraf interface && rimraf index.js && rimraf index.d.ts && rimraf utils && rimraf router && rimraf lib",
+  clean: "rimraf interface && rimraf index.js && rimraf index.d.ts && rimraf utils && rimraf interfaces && rimraf lib && rimraf types",
   postpack: "npm run clean && node ./scripts/restore-package.js",
 };
 
