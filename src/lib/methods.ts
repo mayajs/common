@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { Callback, DecoratorMethodOptions } from "@mayajs/core";
+import { Callback, DecoratorMethodOptions } from "@mayajs/router";
 import { MethodDecoratorFactory } from "../utils/method-factory";
 
 /**

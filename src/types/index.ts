@@ -1,4 +1,4 @@
-import { Callback, DecoratorMethodOptions } from "@mayajs/core";
+import { Callback, DecoratorMethodOptions } from "@mayajs/router";
 
 /**
  * Method factory options type

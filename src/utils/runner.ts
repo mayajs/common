@@ -1,4 +1,4 @@
-import { MayaJsRequest } from "@mayajs/core";
+import { MayaJsRequest } from "@mayajs/router";
 
 export class Runner {
   private requestType: "body" | "params";
