@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/macign/maya#readme",
   "devDependencies": {
-    "@mayajs/core": "^0.4.1",
+    "@mayajs/router": "^0.3.0",
     "reflect-metadata": "^0.1.13",
     "typescript": "^3.9.9"
   }
