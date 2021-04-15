@@ -1,11 +1,11 @@
-import { Request } from "express";
+import { MayaJsRequest } from "@mayajs/router";
 
 export class Runner {
-  private reqType: "body" | "params";
+  private requestType: "body" | "params";
   private validations: any[] = [];
 
   constructor(private field: string) {
-    this.reqType = "body";
+    this.requestType = "body";
   }
 
   setField(value: string): this {
@@ -14,7 +14,7 @@ export class Runner {
   }
 
   setReqType(value: "body" | "params"): this {
-    this.reqType = value;
+    this.requestType = value;
     return this;
   }
 
@@ -22,16 +22,16 @@ export class Runner {
     this.validations.push({ method, message });
   }
 
-  run(req: Request): { status: boolean; message?: string } {
+  run(req: MayaJsRequest): { status: boolean; message?: string } {
     let error: Array<string | undefined> = [];
     if (this.validations.length > 0) {
       error = this.validations
-        .map(validation => {
-          if (!validation.method(req[this.reqType][this.field])) {
-            return `${this.reqType.toUpperCase()}[${this.field}] : ${validation.message}`;
+        .map((validation) => {
+          if (!validation.method(req[this.requestType][this.field])) {
+            return `${this.requestType.toUpperCase()}[${this.field}] : ${validation.message}`;
           }
         })
-        .filter(e => typeof e !== "undefined");
+        .filter((e) => typeof e !== "undefined");
     }
     return error.length > 0 ? { status: true, message: error.join(", ") } : { status: false, message: "" };
   }
