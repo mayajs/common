@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { Callback, DecoratorMethodOptions } from "@mayajs/router";
+import { Callback, DecoratorMethodOptions, MethodNames } from "@mayajs/router";
 import { MethodDecoratorFactory } from "../utils/method-factory";
 
 /**
@@ -11,7 +11,7 @@ import { MethodDecoratorFactory } from "../utils/method-factory";
 export function Get(properties: DecoratorMethodOptions): MethodDecorator;
 export function Get(properties: string, middlewares: Callback[]): MethodDecorator;
 export function Get(properties: any, middlewares: Callback[] = []): MethodDecorator {
-  return MethodDecoratorFactory("GET")(properties, middlewares);
+  return MethodDecoratorFactory(MethodNames.get)(properties, middlewares);
 }
 
 /**
@@ -23,7 +23,7 @@ export function Get(properties: any, middlewares: Callback[] = []): MethodDecora
 export function Post(properties: DecoratorMethodOptions): MethodDecorator;
 export function Post(properties: string, middlewares: Callback[]): MethodDecorator;
 export function Post(properties: any, middlewares: Callback[] = []): MethodDecorator {
-  return MethodDecoratorFactory("POST")(properties, middlewares);
+  return MethodDecoratorFactory(MethodNames.post)(properties, middlewares);
 }
 
 /**
@@ -35,7 +35,7 @@ export function Post(properties: any, middlewares: Callback[] = []): MethodDecor
 export function Patch(properties: DecoratorMethodOptions): MethodDecorator;
 export function Patch(properties: string, middlewares: Callback[]): MethodDecorator;
 export function Patch(properties: any, middlewares: Callback[] = []): MethodDecorator {
-  return MethodDecoratorFactory("PATCH")(properties, middlewares);
+  return MethodDecoratorFactory(MethodNames.patch)(properties, middlewares);
 }
 
 /**
@@ -47,7 +47,7 @@ export function Patch(properties: any, middlewares: Callback[] = []): MethodDeco
 export function Put(properties: DecoratorMethodOptions): MethodDecorator;
 export function Put(properties: string, middlewares: Callback[]): MethodDecorator;
 export function Put(properties: any, middlewares: Callback[] = []): MethodDecorator {
-  return MethodDecoratorFactory("PUT")(properties, middlewares);
+  return MethodDecoratorFactory(MethodNames.put)(properties, middlewares);
 }
 
 /**
@@ -59,7 +59,7 @@ export function Put(properties: any, middlewares: Callback[] = []): MethodDecora
 export function Delete(properties: DecoratorMethodOptions): MethodDecorator;
 export function Delete(properties: string, middlewares: Callback[]): MethodDecorator;
 export function Delete(properties: any, middlewares: Callback[] = []): MethodDecorator {
-  return MethodDecoratorFactory("DELETE")(properties, middlewares);
+  return MethodDecoratorFactory(MethodNames.delete)(properties, middlewares);
 }
 
 /**
@@ -71,5 +71,5 @@ export function Delete(properties: any, middlewares: Callback[] = []): MethodDec
 export function Options(properties: DecoratorMethodOptions): MethodDecorator;
 export function Options(properties: string, middlewares: Callback[]): MethodDecorator;
 export function Options(properties: any, middlewares: Callback[] = []): MethodDecorator {
-  return MethodDecoratorFactory("OPTIONS")(properties, middlewares);
+  return MethodDecoratorFactory(MethodNames.options)(properties, middlewares);
 }
