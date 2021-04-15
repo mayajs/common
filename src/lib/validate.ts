@@ -1,4 +1,4 @@
-import { MayaJsNextFunction, MayaJsRequest, MayaJsResponse } from "@mayajs/core";
+import { MayaJsNextFunction, MayaJsRequest, MayaJsResponse } from "@mayajs/router";
 import { Runner, Container, Functions } from "../utils";
 import { IChain } from "../interfaces";
 

@@ -1,4 +1,4 @@
-import { CONTROLLER_ROUTES, Callback, RequestMethod, DecoratorMethodOptions } from "@mayajs/core";
+import { CONTROLLER_ROUTES, Callback, RequestMethod, DecoratorMethodOptions } from "@mayajs/router";
 import { MethodFactory } from "../types";
 
 /**
