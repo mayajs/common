@@ -19,10 +19,11 @@ export function MethodDecoratorFactory(requestMethod: RequestMethod): MethodFact
 
     // Check if options is an object and also not an array
     if (typeof path === "object" && !Array.isArray(path)) {
-      // Set path to path.path if not undefined else set it to empty string
-      path = path.path ?? "";
       // Set middlewares to path.middlewares if not undefined else set it to empty array
-      middlewares = path.middlewares ?? [];
+      middlewares = path?.middlewares ?? [];
+
+      // Set path to path.path if not undefined else set it to empty string
+      path = path?.path ?? "";
     }
 
     return (target: object, propertyKey: string | symbol): void => {
