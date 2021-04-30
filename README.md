@@ -7,16 +7,15 @@
 npm i @mayajs/common
 ```
 
-## Functions
-
-### Decorators
+## Decorators
 
 - [GET](#get)
 - [POST](#post)
 - [PATCH](#patch)
+- [PATCH](#put)
 - [DELETE](#delete)
 
-### Validations
+## Validations
 
 - [Check](#check)
   - [isNumber](#isnumber)
@@ -34,82 +33,94 @@ npm i @mayajs/common
   - [notEmpty](#notempty)
   - [required](#required)
 
-# DECORATORS
+# METHOD DECORATORS
 
-## GET
+This are functions that defines what function to be used in a route method inside a `controller`.
 
-This is a decorator function is for creating a GET METHOD ROUTE. GET request is used to retreive data from a server at the specified resource.
+## Usage
 
-### Import
+Before using a decorator you must first import it from `@mayajs/common` module.
 
-```javascript
-import { Get } from "@mayajs/common";
+```ts
+import { Get, Post, Put, Patch, Delete } from "@mayajs/common";
 ```
 
-### Usage
+You can use a method decorator like calling a normal function with the exception of adding an `@` sign before the function name. The route path has a default value of `"/"`.
 
-```javascript
-@Get({ path: "/", middlewares: [] })
+```ts
+@Get()
 function(){
     // Do some GET stuff here
 }
 ```
 
+You can also provides additional parameters that includes the `path` and `middlewares` for that specific route.
+
+```ts
+@Get({ path: "/", middlewares: [] })
+function(){
+    // Route logic
+}
+```
+
+> Note: `middlewares` are **OPTIONAL**
+
+You can also just provide a string denoting the name of the route.
+
+```ts
+@Get("/")
+function(){
+    // Route logic
+}
+```
+
+You can also just provide an array of middleware and its path will have a default value of `"/"` as the route name.
+
+```ts
+@Get([middlewares])
+function(){
+    // Route logic
+}
+```
+
+## GET
+
+This is a decorator function is for creating a **GET METHOD ROUTE**. GET request is used to retreive a resource.
+
+```ts
+import { Get } from "@mayajs/common";
+```
+
 ## POST
 
-This is a decorator function is for creating a POST METHOD ROUTE. POST requests are used to send data to the API sever to create or udpate a resource. The data sent to the server is stored in the request body of the HTTP request.
+This is a decorator function is for creating a **POST METHOD ROUTE**. POST requests are used to send data to the API sever to create a resource.
 
-### Import
-
-```javascript
+```ts
 import { Post } from "@mayajs/common";
 ```
 
-### Usage
+## PUT
 
-```javascript
-@Post({ path: "/", middlewares: [] })
-function(){
-    // Do some POST stuff here
-}
+This is a decorator function is for creating a **PUT METHOD ROUTE**. PUT requests are used to replace a resource.
+
+```ts
+import { Put } from "@mayajs/common";
 ```
 
 ## PATCH
 
-This is a decorator function is for creating a PATCH METHOD ROUTE. is similar to POST and PUT but used only apply partial modifications to the resource.
+This is a decorator function is for creating a **PATCH METHOD ROUTE**. PATCH is similar to POST and PUT but used only to apply partial modifications to a resource.
 
-### Import
-
-```javascript
+```ts
 import { Patch } from "@mayajs/common";
-```
-
-### Usage
-
-```javascript
-@Patch({ path: "/", middlewares: [] })
-function(){
-    // Do some PATCH stuff here
-}
 ```
 
 ## DELETE
 
-This is a decorator function is for creating a DELETE METHOD ROUTE. DELETE request is used to delete the resource at the specified URL.
+This is a decorator function is for creating a **DELETE METHOD ROUTE**. DELETE request is used to delete the resource at the specified URL.
 
-### Import
-
-```javascript
+```ts
 import { Delete } from "@mayajs/common";
-```
-
-### Usage
-
-```javascript
-@Delete({ path: "/", middlewares: [] })
-function(){
-    // Do some DELETE stuff here
-}
 ```
 
 # VALIDATIONS
