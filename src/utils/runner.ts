@@ -27,7 +27,13 @@ export class Runner {
     if (this.validations.length > 0) {
       error = this.validations
         .map((validation) => {
-          if (!validation.method(req[this.requestType][this.field])) {
+          const mapField: any = (value: string, memo: any) => {
+            return value.includes(".") ? mapField(value.split(".")[1], memo[value.split(".")[0]]) : memo[value];
+          };
+
+          const field = mapField(this.field, req[this.requestType]);
+
+          if (!validation.method(field)) {
             return `${this.requestType.toUpperCase()}[${this.field}] : ${validation.message}`;
           }
         })
