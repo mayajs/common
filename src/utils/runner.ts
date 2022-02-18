@@ -18,8 +18,8 @@ export class Runner {
     return this;
   }
 
-  addValidation(method: Function, message: string): void {
-    this.validations.push({ method, message });
+  addValidation(method: Function, message: string, customMessage?: string): void {
+    this.validations.push({ method, message: customMessage ?? message });
   }
 
   run(req: MayaJsRequest): { status: boolean; message?: string } {
