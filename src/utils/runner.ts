@@ -18,29 +18,27 @@ export class Runner {
     return this;
   }
 
-  addValidation(method: Function, message: string, customMessage?: string): void {
-    this.validations.push({ method, message: customMessage ?? message });
+  addValidation(method: Function, message: string, options: { message?: string; isOptional: boolean }): void {
+    this.validations.push({ method, message: options?.message ?? message, isOptional: options?.isOptional ?? false });
+  }
+
+  mapField(value: string, memo: any): any {
+    try {
+      return value.includes(".") ? this.mapField(value.split(".")[1], memo[value.split(".")[0]]) : memo[value];
+    } catch (err) {
+      return null;
+    }
   }
 
   run(req: MayaJsRequest): { status: boolean; message?: string } {
     let error: Array<string | undefined> = [];
 
     if (this.validations.length > 0) {
-      console.log(this.validations);
-
       error = this.validations
         .map((validation) => {
-          const mapField: any = (value: string, memo: any) => {
-            try {
-              return value.includes(".") ? mapField(value.split(".")[1], memo[value.split(".")[0]]) : memo[value];
-            } catch (err) {
-              return null;
-            }
-          };
+          const field = this.mapField(this.field, req[this.requestType]);
 
-          const field = mapField(this.field, req[this.requestType]);
-
-          if (!field) {
+          if (field === null && !validation.isOptional) {
             return `${this.requestType.toUpperCase()}[${this.field}] : is not defined!`;
           }
 
