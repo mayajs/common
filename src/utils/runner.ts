@@ -38,11 +38,7 @@ export class Runner {
         .map((validation) => {
           const field = this.mapField(this.field, req[this.requestType]);
 
-          if (field === null && !validation.isOptional) {
-            return `${this.requestType.toUpperCase()}[${this.field}] : is not defined!`;
-          }
-
-          if (!validation.method(field)) {
+          if (!validation.method(field, validation.isOptional)) {
             return `${this.requestType.toUpperCase()}[${this.field}] : ${validation.message}`;
           }
         })
