@@ -16,7 +16,7 @@ export class Utils {
   }
 
   notUndefined(field: any): boolean {
-    return !this.checkVariableType(field, "undefined");
+    return !this.checkVariableType(field, "undefined") && field !== "" && field !== null;
   }
 
   validate(field: any, callback: () => boolean): boolean {
@@ -25,6 +25,10 @@ export class Utils {
 
   regExpTest(field: any, pattern: RegExp): boolean {
     return new RegExp(pattern).test(field);
+  }
+
+  isObject(field: any) {
+    return field ? Object.keys(field).length > 0 : false;
   }
 
   private fieldNotEmpty(field: any): boolean {
