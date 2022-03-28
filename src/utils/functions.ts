@@ -19,9 +19,7 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   required(message?: string): Chain {
-    const test = (field: any): boolean => {
-      return this.utils.notUndefined(field) || this.utils.isObject(field) || Array.isArray(field);
-    };
+    const test = (field: any): boolean => this.utils.notUndefinedOrNull(field);
     this.runner.addValidation(test, "is required", { message, isOptional: false });
     return this.middleware;
   }
@@ -102,7 +100,18 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   notEmpty(message?: string): Chain {
-    const test = (field: any): boolean => (field !== null ? this.utils.validate(field, () => this.utils.sanitizeField(field).length > 0) : false);
+    const test = (field: any, isOptional: boolean): boolean =>
+      this.utils.validate(
+        field,
+        () => {
+          if (this.utils.isObject(field)) return Object.keys(field).length > 0;
+          if (this.utils.string(field)) return field !== "" && field.length > 0;
+          if (Array.isArray(field)) return field.length > 0;
+          return this.utils.sanitizeField(field).length > 0;
+        },
+        isOptional
+      );
+
     this.runner.addValidation(test, "is empty", { message, isOptional: true });
     return this.middleware;
   }
