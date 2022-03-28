@@ -16,11 +16,15 @@ export class Utils {
   }
 
   notUndefined(field: any): boolean {
-    return !this.checkVariableType(field, "undefined") && field !== "" && field !== null;
+    return !this.checkVariableType(field, "undefined");
   }
 
-  validate(field: any, callback: () => boolean): boolean {
-    return this.fieldNotEmpty(field) ? callback() : true;
+  notNull(field: any): boolean {
+    return field !== null;
+  }
+
+  validate(field: any, callback: () => boolean, isOptional = true): boolean {
+    return this.notUndefinedOrNull(field) ? callback() : isOptional;
   }
 
   regExpTest(field: any, pattern: RegExp): boolean {
@@ -28,11 +32,11 @@ export class Utils {
   }
 
   isObject(field: any) {
-    return field ? Object.keys(field).length > 0 : false;
+    return this.checkVariableType(field, "object");
   }
 
-  private fieldNotEmpty(field: any): boolean {
-    return this.notUndefined(field) && field !== null;
+  notUndefinedOrNull(field: any): boolean {
+    return this.notUndefined(field) && this.notNull(field);
   }
 
   private checkVariableType(field: any, type: string): boolean {
