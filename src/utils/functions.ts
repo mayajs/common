@@ -46,14 +46,14 @@ export class Functions<Chain> implements IFunctions<Chain> {
   }
 
   isString(message?: string): Chain {
-    const condition = (field: any) => this.utils.string(field) && this.utils.regExpTest(field, /^[A-Za-z0-9.,\s]*$/);
+    const condition = (field: any) => this.utils.string(field) && this.utils.regExpTest(field, /^[\w\.,\sÑñ]*$/);
     const test = (field: any): boolean => this.utils.validate(field, () => condition(field));
     this.runner.addValidation(test, "is not a string or not a valid string format", { message, isOptional: true });
     return this.middleware;
   }
 
   isAddress(message?: string): Chain {
-    const condition = (field: any) => this.utils.string(field) && this.utils.regExpTest(field, /^[a-zA-Z0-9#_\-.,()@\s]*$/);
+    const condition = (field: any) => this.utils.string(field) && this.utils.regExpTest(field, /^[\w#\.,()@\sÑñ]*$/);
     const test = (field: any): boolean => this.utils.validate(field, () => condition(field));
     this.runner.addValidation(test, "is not a valid address format", { message, isOptional: true });
     return this.middleware;
