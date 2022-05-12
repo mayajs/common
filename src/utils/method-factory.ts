@@ -16,7 +16,7 @@ export function MethodDecoratorFactory(requestMethod: RequestMethod): MethodFact
     // Check if options is a string
     if (typeof property === "string" || !property) {
       // Set path to options if not undefined else set it to empty string
-      path = property ?? "";
+      path = property ?? path;
     }
 
     if (Array.isArray(property)) {
@@ -30,7 +30,7 @@ export function MethodDecoratorFactory(requestMethod: RequestMethod): MethodFact
       middlewares = property?.middlewares ?? [];
 
       // Set path to path.path if not undefined else set it to empty string
-      path = property?.path ?? "";
+      path = property?.path ?? path;
     }
 
     return (target: object, propertyKey: string | symbol): void => {
