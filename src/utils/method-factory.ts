@@ -11,7 +11,7 @@ export function MethodDecoratorFactory(requestMethod: RequestMethod): MethodFact
   function RequestMethodFactory(options: DecoratorMethodOptions): MethodDecorator;
   function RequestMethodFactory(path: string, middlewares: Callback[]): MethodDecorator;
   function RequestMethodFactory(property: any = "/", middlewares: any = null): any {
-    let path = "";
+    let path = "/";
 
     // Check if options is a string
     if (typeof property === "string" || !property) {
