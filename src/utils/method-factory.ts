@@ -10,7 +10,7 @@ import { MethodFactory } from "../types";
 export function MethodDecoratorFactory(requestMethod: RequestMethod): MethodFactory {
   function RequestMethodFactory(options: DecoratorMethodOptions): MethodDecorator;
   function RequestMethodFactory(path: string, middlewares: Callback[]): MethodDecorator;
-  function RequestMethodFactory(property: any = "", middlewares: any = null): any {
+  function RequestMethodFactory(property: any = "/", middlewares: any = null): any {
     let path = "";
 
     // Check if options is a string
