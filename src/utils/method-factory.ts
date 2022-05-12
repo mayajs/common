@@ -2,7 +2,7 @@ import { CONTROLLER_ROUTES, Callback, RequestMethod, DecoratorMethodOptions } fr
 import { MethodFactory } from "../types";
 
 /**
- * Factory function for a decorator that recieve a method type and return a MethodDecorator
+ * Factory function for a decorator that receive a method type and return a MethodDecorator
  *
  * @param method Type of method to be applied on the route ie: "GET" | "POST" | "DELETE" | "OPTIONS" | "PUT" | "PATCH"
  * @returns Function(param: DecoratorMethodOptions) => MethodDecorator
