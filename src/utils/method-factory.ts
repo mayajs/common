@@ -8,7 +8,7 @@ import { MethodFactory } from "../types";
  * @returns Function(param: DecoratorMethodOptions) => MethodDecorator
  */
 export function MethodDecoratorFactory(requestMethod: RequestMethod): MethodFactory {
-  function RequestMethodFactory(props: DecoratorMethodOptions): MethodDecorator;
+  function RequestMethodFactory(options: DecoratorMethodOptions): MethodDecorator;
   function RequestMethodFactory(path: string, middlewares: Callback[]): MethodDecorator;
   function RequestMethodFactory(property: any = "", middlewares: any = null): any {
     let path = "";
