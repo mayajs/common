@@ -17,9 +17,7 @@
     "rimraf": "rimraf index.js && rimraf index.d.ts && rimraf lib && rimraf interfaces && rimraf types && rimraf utils",
     "clean": "npm run rimraf && npm run tgz",
     "tgz": "rimraf *.tgz",
-    "start": "npm run clean && tsc -w",
-    "prepack": "npm run clean && tsc --outDir .",
-    "postpack": "npm run clean"
+    "start": "npm run clean && tsc -w"
   },
   "repository": {
     "type": "git",
