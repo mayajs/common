@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/mayajs/maya/blob/master/maya.svg"></p>
+<p align="center"><img src="https://github.com/mayajs/maya/blob/main/logo.svg"></p>
 <h1 align="center">MayaJS common modules</h1>
 
 ## Installation
