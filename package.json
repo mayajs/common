@@ -17,7 +17,9 @@
     "rimraf": "rimraf index.js && rimraf index.d.ts && rimraf lib && rimraf interfaces && rimraf types && rimraf utils",
     "clean": "npm run rimraf && npm run tgz",
     "tgz": "rimraf *.tgz",
-    "start": "npm run clean && tsc -w",
+    "package": "node ./scripts/clean-package.js",
+    "start": "npm run clean && npm run tgz && tsc -w",
+    "prepack": "npm run clean && npm run package && tsc --outDir .",
     "release": "semantic-release --branches main"
   },
   "repository": {
