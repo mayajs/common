@@ -2,21 +2,21 @@ import { CONTROLLER_ROUTES, Callback, RequestMethod, DecoratorMethodOptions } fr
 import { MethodFactory } from "../types";
 
 /**
- * Factory function for a decorator that recieve a method type and return a MethodDecorator
+ * Factory function for a decorator that receive a method type and return a MethodDecorator
  *
  * @param method Type of method to be applied on the route ie: "GET" | "POST" | "DELETE" | "OPTIONS" | "PUT" | "PATCH"
  * @returns Function(param: DecoratorMethodOptions) => MethodDecorator
  */
 export function MethodDecoratorFactory(requestMethod: RequestMethod): MethodFactory {
-  function RequestMethodFactory(props: DecoratorMethodOptions): MethodDecorator;
+  function RequestMethodFactory(options: DecoratorMethodOptions): MethodDecorator;
   function RequestMethodFactory(path: string, middlewares: Callback[]): MethodDecorator;
-  function RequestMethodFactory(property: any = "", middlewares: any = null): any {
-    let path = "";
+  function RequestMethodFactory(property: any = "/", middlewares: any = null): any {
+    let path = "/";
 
     // Check if options is a string
     if (typeof property === "string" || !property) {
       // Set path to options if not undefined else set it to empty string
-      path = property ?? "";
+      path = property ?? path;
     }
 
     if (Array.isArray(property)) {
@@ -30,7 +30,7 @@ export function MethodDecoratorFactory(requestMethod: RequestMethod): MethodFact
       middlewares = property?.middlewares ?? [];
 
       // Set path to path.path if not undefined else set it to empty string
-      path = property?.path ?? "";
+      path = property?.path ?? path;
     }
 
     return (target: object, propertyKey: string | symbol): void => {

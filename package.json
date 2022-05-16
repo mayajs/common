@@ -18,8 +18,7 @@
     "clean": "npm run rimraf && npm run tgz",
     "tgz": "rimraf *.tgz",
     "start": "npm run clean && tsc -w",
-    "prepack": "npm run clean && tsc --outDir .",
-    "postpack": "npm run clean"
+    "release": "semantic-release --branches main"
   },
   "repository": {
     "type": "git",
@@ -44,12 +43,12 @@
     "url": "https://github.com/macign/maya/issues"
   },
   "homepage": "https://github.com/macign/maya#readme",
-  "dependencies": {
-    "reflect-metadata": "^0.1.13"
-  },
   "devDependencies": {
-    "@mayajs/router": "^0.5.6",
+    "@mayajs/router": "^0.7.4",
     "@types/node": "^14.14.40",
-    "typescript": "^3.9.9"
+    "reflect-metadata": "^0.1.13",
+    "semantic-release": "^19.0.2",
+    "ts-node": "^8.8.2",
+    "typescript": "^4.1.2"
   }
 }
